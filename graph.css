@@ -1,0 +1,36 @@
+.chart {
+	display: block;
+	margin: auto;
+	font-size: 11px;
+}
+rect {
+	stroke: #eee;
+	fill: #aaa;
+	fill-opacity: .9;
+}
+rect.parent {
+	cursor: pointer;
+	fill: steelblue;
+}
+text {
+	pointer-events: none;
+}
+.bar {
+	fill: steelblue;
+}
+.bar:hover {
+	fill: brown;
+}
+.axis {
+	font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.x.axis path {
+	display: none;
+}
