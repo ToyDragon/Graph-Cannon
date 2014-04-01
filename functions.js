@@ -1,125 +1,13 @@
-var scripts = document.getElementsByTagName('script');
-var myScript = scripts[0];//gets this script
-
-//parses incoming query string into a JSON object
-var parseQueryString = function(url) {
-    var a = document.createElement('a');
-    a.href = url;
-    str = a.search.replace(/\?/, '');
-
-    return deparam(str, true /* coerce values, eg. 'false' into false */);
-};
-
-var isArray = Array.isArray || function(obj) {
-    return Object.prototype.toString.call(obj) == '[object Array]';
-};
-
-var deparam = function( params, coerce ) {
-    var obj = {},
-        coerce_types = { 'true': !0, 'false': !1, 'null': null };
-
-    // Iterate over all name=value pairs.
-    each( params.replace( /\+/g, ' ' ).split( '&' ), function(v, j){
-        var param = v.split( '=' ),
-            key = decodeURIComponent( param[0] ),
-            val,
-            cur = obj,
-            i = 0,
-
-        // If key is more complex than 'foo', like 'a[]' or 'a[b][c]', split it
-        // into its component parts.
-            keys = key.split( '][' ),
-            keys_last = keys.length - 1;
-
-        // If the first keys part contains [ and the last ends with ], then []
-        // are correctly balanced.
-        if ( /\[/.test( keys[0] ) && /\]$/.test( keys[ keys_last ] ) ) {
-            // Remove the trailing ] from the last keys part.
-            keys[ keys_last ] = keys[ keys_last ].replace( /\]$/, '' );
-
-            // Split first keys part into two parts on the [ and add them back onto
-            // the beginning of the keys array.
-            keys = keys.shift().split('[').concat( keys );
-
-            keys_last = keys.length - 1;
-        } else {
-            // Basic 'foo' style key.
-            keys_last = 0;
-        }
-
-        // Are we dealing with a name=value pair, or just a name?
-        if ( param.length === 2 ) {
-            val = decodeURIComponent( param[1] );
-
-            // Coerce values.
-            if ( coerce ) {
-                val = val && !isNaN(val)            ? +val              // number
-                    : val === 'undefined'             ? undefined         // undefined
-                    : coerce_types[val] !== undefined ? coerce_types[val] // true, false, null
-                    : val;                                                // string
-            }
-
-            if ( keys_last ) {
-                // Complex key, build deep object structure based on a few rules:
-                // * The 'cur' pointer starts at the object top-level.
-                // * [] = array push (n is set to array length), [n] = array if n is
-                //   numeric, otherwise object.
-                // * If at the last keys part, set the value.
-                // * For each keys part, if the current level is undefined create an
-                //   object or array based on the type of the next keys part.
-                // * Move the 'cur' pointer to the next level.
-                // * Rinse & repeat.
-                for ( ; i <= keys_last; i++ ) {
-                    key = keys[i] === '' ? cur.length : keys[i];
-                    cur = cur[key] = i < keys_last
-                        ? cur[key] || ( keys[i+1] && isNaN( keys[i+1] ) ? {} : [] )
-                        : val;
-                }
-
-            } else {
-                // Simple key, even simpler rules, since only scalars and shallow
-                // arrays are allowed.
-
-                if ( isArray( obj[key] ) ) {
-                    // val is already an array, so push on the next value.
-                    obj[key].push( val );
-
-                } else if ( obj[key] !== undefined ) {
-                    // val isn't an array, but since a second value has been specified,
-                    // convert val into an array.
-                    obj[key] = [ obj[key], val ];
-
-                } else {
-                    // val is a scalar.
-                    obj[key] = val;
-                }
-            }
-
-        } else if ( key ) {
-            // No value was defined, so set something meaningful.
-            obj[key] = coerce
-                ? undefined
-                : '';
-        }
-    });
-
-    return obj;
-};
-
-var each = function (arr, fnc) {
-    var data = [];
-    for (i = 0; i < arr.length; i++)
-        data.push(fnc(arr[i]));
-    return data;
-};
-
-var info = parseQueryString(myScript.src);
-
-if(info.question)
-	createBarGraph(info.question, info.title, info.element_name);
+/*
+ * createBarGraph(question_id, title, element_name)
+ *
+ * Creates a bar graph representation of the question identified the by
+ * question_id, with the given title. Appends the bar graph to the element
+ * with the id element_name.
+ */
 function createBarGraph(question_id, title, element_name){
 	if(!element_name)element_name = '#graph'
-	if(title == undefined)title = getQuestionTitle(question_id)[0].title;
+	if(title == undefined)title = title;
 
 	var answers = getAnswers(question_id);
 	var votes = getQuestionResponses(question_id);
@@ -208,6 +96,18 @@ function createBarGraph(question_id, title, element_name){
 		});
 	}
 }
+/* 
+ * getAnswers(question_id)
+ *
+ * Queries the database to retreive an array of javascript objects with
+ * id and answer_label fields
+ *
+ * [
+ *  {"id":"309","answer_label":"Yes"},
+ *  {"id":"310","answer_label":"Maybe"},
+ *  {"id":"311","answer_label":"No"}
+ * ]
+ */
 function getAnswers(question_id){
 	var query = "SELECT id, answer_label FROM sample_survey_answers WHERE question_id="+question_id;
 	var xmlHttp = new XMLHttpRequest();
@@ -215,6 +115,14 @@ function getAnswers(question_id){
 	xmlHttp.send( null );
 	return JSON.parse(xmlHttp.responseText);
 }
+/* 
+ * getQuestionResponses(question_id)
+ *
+ * Queries the database to retreive a javascript object with keys representing the answer
+ * ids paired with the number of votes.
+ *
+ * {"417":"500","210","200"}
+ */
 function getQuestionResponses(question_id){
 	var answers = getAnswers(question_id);
 	var query = "SELECT COUNT(*) as amt, answer_id FROM sample_survey_response_details WHERE ";
@@ -233,10 +141,18 @@ function getQuestionResponses(question_id){
 	}
 	return processed;
 }
+/* 
+ * getQuestionTitle(question_id)
+ *
+ * Queries the database to retreive a string representing the title of
+ * the question.
+ *
+ * "Do you believe that Syria will fulfill its obligations under the agreement by the June deadline?"
+ */
 function getQuestionTitle(question_id){
 	var xmlHttp = new XMLHttpRequest();
 	var query = "SELECT title FROM sample_survey_questions WHERE id="+question_id;
 	xmlHttp.open( "GET", 'query.php?query='+query, false );
 	xmlHttp.send( null );
-	return JSON.parse(xmlHttp.responseText);
+	return JSON.parse(xmlHttp.responseText)[0].title;
 }
