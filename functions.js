@@ -6,48 +6,60 @@
  * with the id element_name.
  */
 function createBarGraph(question_id, title, element_name){
-	if(!element_name)element_name = '#graph'
+	if(!element_name)element_name = '#graph';
 	if(title == undefined)title = getQuestionTitle(question_id);
 
+	//get the cooresponding data from the server database
 	var answers = getAnswers(question_id);
 	var votes = getQuestionResponses(question_id);
 
-	var margin = {top: 60, right: 40, bottom: 120, left: 40},
-	width = window.innerWidth/2 - margin.left - margin.right,
-	height = window.innerHeight - margin.top - margin.bottom;
-		var x = d3.scale.ordinal()
-			.rangeRoundBands([0, width], .1);
+	var margin = {top: 60, right: 40, bottom: 120, left: 40};
+	//width and heigth represent the size of the graph widget
+	var width = window.innerWidth/2 - margin.left - margin.right;
+	var height = window.innerHeight - margin.top - margin.bottom;
 
-		var y = d3.scale.linear()
-			.range([height, 0]);
+	//Sets the X scale to be ordinal(words not numbers), spread out over the screen width interval [0, width]
+	var x = d3.scale.ordinal()
+		.rangeRoundBands([0, width], .1);
 
-		var xAxis = d3.svg.axis()
-			.scale(x)
-			.orient("bottom");
+	//Sets the X scale to be linear(numbers), spread out over the screen height interval [height, 0]
+	var y = d3.scale.linear()
+		.range([height, 0]);
 
-		var yAxis = d3.svg.axis()
-			.scale(y)
-			.orient("left")
-			.ticks(10);
-		
-		x.domain(answers.map(function(answer) { return answer.answer_label; }));
-		y.domain([0, d3.max(answers, function(answer) { return votes[answer.id]; })]);
-		
-	var svg = d3.select(element_name).append("svg")
+	//xAxis is a function that creates an axis with a scale of x and orientation of bottom
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+
+	//yAxis is a function that creates an axis with a scale of y, an orientation of left, and 10 ticks
+	var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left")
+		.ticks(10);
+	
+	//sets the x axis domain to be the names of the answers
+	x.domain(answers.map(function(answer) { return answer.answer_label; }));
+
+	//sets the y axis domain the be from 0 to the highest vote count
+	y.domain([0, d3.max(answers, function(answer) { return votes[answer.id]; })]);
+	
+	//creates the bargraph element as a svg(Scalabe Vector Graphics), with the width and height specified
+	// something about the g
+	var barGraph = d3.select(element_name).append("svg")
 		.attr("width", width + margin.left + margin.right)
 		.attr("height", height + margin.top + margin.bottom)
 		.append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-	svg.append("g")
+	barGraph.append("g")
 		.attr("class", "x axis")
 		.attr("transform", "translate(0," + height + ")")
 		.call(xAxis)
 		.selectAll(".tick text")
 		.call(wrap, x.rangeBand());
 
-	svg.append("g")
+	barGraph.append("g")
 		.attr("class", "y axis")
 		.call(yAxis)
 		.append("text")
@@ -57,7 +69,7 @@ function createBarGraph(question_id, title, element_name){
 		.style("text-anchor", "end")
 		.text("Votes");
 
-	svg.selectAll(".bar")
+	barGraph.selectAll(".bar")
 		.data(answers)
 		.enter().append("rect")
 		.attr("class", "bar")
@@ -65,13 +77,16 @@ function createBarGraph(question_id, title, element_name){
 		.attr("width", x.rangeBand())
 		.attr("y", function(answer) { return y(votes[answer.id]); })
 		.attr("height", function(answer) { return height - y(votes[answer.id]); });
-	svg.append("text")
-        .attr("x", (width / 2))             
-        .attr("y", 0 - (margin.top / 2))
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("text-decoration", "underline")  
-        .text(title);
+
+
+	barGraph.append("text")
+		.attr("x", (width / 2))             
+		.attr("y", 0 - (margin.top / 2))
+		.attr("text-anchor", "middle")  
+		.style("font-size", "16px") 
+		.style("text-decoration", "underline")  
+		.text(title);
+	
 	function wrap(text, width) {
 		text.each(function() {
 			var text = d3.select(this),
