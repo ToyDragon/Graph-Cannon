@@ -149,7 +149,7 @@
 							</form>
 
 							<!-- START BAR 1 -->
-							<div id = "bar1" value = "0" style = "display : none;">
+							<div id = "bar1" value = "0" style = "display : block;">
 								Bar 1
 								<form action="demo_form.asp">
 									<select id = "bar1Data" onchange = "">
