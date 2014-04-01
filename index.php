@@ -115,103 +115,7 @@
 		<link type="text/css" rel="stylesheet" href="http://mbostock.github.io/d3/talk/20111018/style.css"/>
 		<script type="text/javascript" src="http://mbostock.github.io/d3/talk/20111018/d3/d3.js"></script>
 		<script type="text/javascript" src="http://mbostock.github.io/d3/talk/20111018/d3/d3.layout.js"></script>
-		<style type="text/css">
-			.chart {
-				display: block;
-				margin: auto;
-				font-size: 11px;
-			}
-			rect {
-				stroke: #eee;
-				fill: #aaa;
-				fill-opacity: .9;
-			}
-			rect.parent {
-				cursor: pointer;
-				fill: steelblue;
-			}
-			text {
-				pointer-events: none;
-			}
-			
-			.bar {
-			  fill: steelblue;
-			}
-
-			.bar:hover {
-			  fill: brown;
-			}
-
-			.axis {
-			  font: 10px sans-serif;
-			}
-
-			.axis path,
-			.axis line {
-			  fill: none;
-			  stroke: #000;
-			  shape-rendering: crispEdges;
-			}
-
-			.x.axis path {
-			  display: none;
-			}
-	        #dropDown{
-	            width: 100%;
-	            align: center;
-	            
-	        }
-	        #BarGraph{
-	            width: 100%;
-	            align: center;
-	            
-	        }
-	        #checkBoxDualScale{
-	            float: left;
-	            width: 25%;
-	          
-	        }
-	        #bar3{
-	            
-	            value: 3;
-	            width: 50%
-	            
-	        }
-	        #bar1{
-	            
-	            value: 0;
-
-	            
-	        }
-	        #bar2{
-	            
-	            value: 1;
-	            
-	        }
-	        #orientation{
-	        	align: center;
-	        	float: left;
-	            width: 33%;
-	            height: 20%
-	            
-	        }
-	        #xAxisOrientation{
-	            float: left;
-	            width: 50%;
-	        }
-	        #yAxisOrientation{
-	            float: left;
-	            width: 50%;
-	            
-	        }
-	        #editLables{
-				float: left;
-	            width: 30%;
-
-
-	        }
-
-					</style>
+		<link type="text/css" rel="stylesheet" href="graph.css"/>
 		</style>
 		<div>
 			<div style='float:left;width:50%;height:100%;background-color:#aaaaaa;' align='center'>
@@ -227,11 +131,11 @@
 						Select Desired Graph
 						<form>
 							<select id = "GraphType">
-								<option value="default"> 		Select Graph...	 	</option>
-								<option value="0"> 				Bar Graph 	 		</option>
-								<option value="1"> 				Pie Graph 	 		</option>
-								<option value="2"> 				Line Graph 	 		</option>
-								<option value="3"> 				Bubble Graph 		</option>
+								<option value="default">	Select Graph...	 	</option>
+								<option value="0">			Bar Graph 	 		</option>
+								<option value="1">			Pie Graph			</option>
+								<option value="2">			Line Graph 	 		</option>
+								<option value="3">			Bubble Graph 		</option>
 							</select>
 							<!--<input type="submit">-->
 						</form>

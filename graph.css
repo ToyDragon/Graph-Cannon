@@ -30,7 +30,81 @@ text {
 	stroke: #000;
 	shape-rendering: crispEdges;
 }
-
 .x.axis path {
 	display: none;
+}
+.chart {
+	display: block;
+	margin: auto;
+	font-size: 11px;
+}
+rect {
+	stroke: #eee;
+	fill: #aaa;
+	fill-opacity: .9;
+}
+rect.parent {
+	cursor: pointer;
+	fill: steelblue;
+}
+text {
+	pointer-events: none;
+}
+.bar {
+	fill: steelblue;
+}
+.bar:hover {
+	fill: brown;
+}
+.axis {
+	font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+.x.axis path {
+	display: none;
+}
+#dropDown{
+	width: 100%;
+	align: center;
+}
+#BarGraph{
+	width: 100%;
+	align: center;
+}
+#checkBoxDualScale{
+	float: left;
+	width: 25%;
+}
+#bar3{
+	value: 3;
+	width: 50%
+}
+#bar1{
+	value: 0;
+}
+#bar2{
+	value: 1;
+}
+#orientation{
+	align: center;
+	float: left;
+	width: 33%;
+	height: 20%
+}
+#xAxisOrientation{
+	float: left;
+	width: 50%;
+}
+#yAxisOrientation{
+	float: left;
+	width: 50%;
+}
+#editLables{
+	float: left;
+	width: 30%;
 }
