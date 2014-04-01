@@ -548,7 +548,7 @@
 					var text = '<body><div id = "graph"><\/div><script type="text\/javascript" src="http:\/\/mbostock.github.io\/d3\/talk\/20111018\/d3\/d3.js"><\/script><script type="text\/javascript" src="http:\/\/mbostock.github.io\/d3\/talk\/20111018\/d3\/d3.layout.js"><\/script><script src="http:\/\/d3js.org\/d3.v3.min.js"><\/script><link type="text\/css" rel="stylesheet" href="http:\/\/54.186.251.162\/graph.css"\/><script type="text\/javascript" src="http:\/\/54.186.251.162\/functions.js"><\/script><script>createBarGraph('+last_thing+');<\/script><\/body>';
 
 
-				 	 window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+				 	 window.prompt("Copy to clipboard: Ctrl+C, DICK!", text);
 				}
 				function updateTitle(){
 					var title = document.getElementById('graphTitle').value;
