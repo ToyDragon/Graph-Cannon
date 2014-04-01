@@ -7,7 +7,7 @@
  */
 function createBarGraph(question_id, title, element_name){
 	if(!element_name)element_name = '#graph'
-	if(title == undefined)title = title;
+	if(title == undefined)title = getQuestionTitle(question_id);
 
 	var answers = getAnswers(question_id);
 	var votes = getQuestionResponses(question_id);
