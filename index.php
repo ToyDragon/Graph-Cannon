@@ -126,140 +126,94 @@
 				<div style='height:60%;width:100%;background-color:#aaffaa;' id='surveySelect'></div>
 				<div style='height:40%;width:100%;background-color:#aaaaff;' id='graphConfig'>
 					
+					<!-- Drop down menu -->
 					<div id = "dropDown">
-						<!-- Main Header-->
-						Select Desired Graph
 						<form>
 							<select id = "GraphType">
-								<option value="default">	Select Graph...	 	</option>
-								<option value="0">			Bar Graph 	 		</option>
-								<option value="1">			Pie Graph			</option>
-								<option value="2">			Line Graph 	 		</option>
-								<option value="3">			Bubble Graph 		</option>
+								<option value="default">    Select Graph...     </option>
+								<option value="0">          Bar Graph           </option>
+								<option value="1">          Pie Graph           </option>
+								<option value="2">          Line Graph          </option>
+								<option value="3">          Bubble Graph        </option>
 							</select>
 							<!--<input type="submit">-->
 						</form>
 					</div>
-					<div id = "BarGraph" 	style =	"display : none">
-						<div> 	Bar Graph Display Options 	</div>
+					<div id = "BarGraph" style = "display : none">
+						<div> Bar Graph Display Options </div>
 						<div id = "checkBoxDualScale">
 							<form>
 								<input id="dualScale" type="checkbox" >
 									Enable Dual-Scale
-								</input>		
+								</input>
 							</form>
-							<!--If dualScale is enabled, Display Bar1, Bar2 -->
-							<!-- START BAR 0 -->
-							<div id = "bar3" value = "3" style = "display : block">
-								Bar	
-								<form action="demo_form.asp">
-									<select id = "bar1Data" 		onchange = ""  >
-										<!-- Survey Specific Data Types -->
-										<option value="dataType1">		Data Type 1 	</option>
-										<option value="dataType2"> 		Data Type 2  	</option>
-										<option value="dataType3"> 		Data Type 3  	</option>
-										<option value="dataType4">		Data Type 4  	</option>
-									</select>
-								</form>
-							</div>
+
 							<!-- START BAR 1 -->
 							<div id = "bar1" value = "0" style = "display : none;">
 								Bar 1
 								<form action="demo_form.asp">
 									<select id = "bar1Data" onchange = "">
 										<!-- Survey Specific Data Types -->
-										<option value="dataType1">		Data Type 1 	</option>
-										<option value="dataType2"> 		Data Type 2  	</option>
-										<option value="dataType3"> 		Data Type 3  	</option>
-										<option value="dataType4">		Data Type 4  	</option>
-
+										<option value="dataType1">      Data Type 1      </option>
+										<option value="dataType2">      Data Type 2      </option>
+										<option value="dataType3">      Data Type 3      </option>
+										<option value="dataType4">      Data Type 4      </option>
 									</select>
-									
 								</form>
-
 							</div>
-
 							
 							<!-- START BAR 2 -->
 							<div id = "bar2" value = "1" style = "display : none;" >
-
 								Bar 2
-
 								<form action="demo_form.asp">
-
 									<select id = "bar2Data"			 onchange = "" >
-
 										<!-- Survey Specific Data Types -->
 										<option value="dataType1">		Data Type 1 	</option>
 										<option value="dataType2"> 		Data Type 2  	</option>
 										<option value="dataType3"> 		Data Type 3  	</option>
 										<option value="dataType4">		Data Type 4  	</option>
-
 									</select>
-									
 								</form>
-
 							</div>
-
 						</div>
 						<!-- END CHECK BOX FOR DUAL SCALE -->
 
 						<!-- START ORIENTATION -->
 						<div id = "orientation">
-
-								Orientation 		
+							Orientation
 							<div id = "orientationDropBox">
 								<form>
-
 									<select id = "graphOrientationDisplay" onchange = "" >
-
 										<!-- Survey Specific Data Types -->
 										<option value="horizontalDisplay">		Horizontal 	</option>
 										<option value="verticalDisplay"> 		Vertical  	</option>
-									
-
 									</select>
-									
 								</form>
 							</div>	
 
 							<div id = "xAxisOrientation">		
-								X - Axis 		
-
+								X - Axis
 								<form action="demo_form.asp"><br>
-
-									Min Val: 	<input type="text" style ="width:60"	id="minimumXValue"> <br>
+									Min Val: 	<input type="text" style ="width:60"	id="minimumXValue">
 									Max Val: 	<input type="text" style ="width:60" 	id="maximumXValue">
-									
 								</form>
-
 							</div>
-
 							<div id = "yAxisOrientation">		
-								Y - Axis 		
-
+								Y - Axis
 								<form action="demo_form.asp"><br>
-
-									Min Val:	<input type="text" style ="width:60"	id="minimumYValue"><br>
+									Min Val:	<input type="text" style ="width:60"	id="minimumYValue">
 									Max Val:	<input type="text" style ="width:60"	id="maximumYValue">
-									
 								</form>
 							</div>
-
-
 						</div>
 						<!-- END ORIENTATION -->
 
-
 						<!-- START EDIT LABLES	-->
 						<div id = "editLables">
-
-							
 							<form action="demo_form.asp">
-
 								Graph Title: 		<input type = "text" style ="width:100"	id = "graphTitle" onclick ="
 						d3.event.stopPropagation();"onchange='updateTitle()'><br>
-								X - Axis Lable:		<input type = "text" style ="width:100"	id = "xAxisLable"><br>
+								X - Axis Lable:		<input type = "text" style ="width:100"	id = "xAxisLable">
 								Y - Axis Lable: 	<input type = "text" style ="width:100"	id = "yAxisLable">
 							</form>
 						</div>
@@ -272,7 +226,7 @@
 							<div> 	Line Graph Display Options 	</div>
 						</div>
 						<div id = "BubbleGraph" 	style =	"display : none">
-							<div> 	Bubble Graph Display Options 	</div>
+							<div> 	Bubble Graph Display Options </div>
 						</div>
 					</div>
 			</div>
@@ -302,7 +256,6 @@
 						if (i == select.value)
 						{
 							elements[i].style.display = "block";
-
 						}
 						else
 						{
@@ -314,23 +267,15 @@
 				
 				function toggleDualScale()
 				{
-					var ele1 = document.getElementById("bar1");
 					var ele2 = document.getElementById("bar2");
-					var ele3 = document.getElementById("bar3");
 
 					if (checked.checked == true)
 					{
-						ele1.style.display = "block";
 						ele2.style.display = "block";
-						ele3.style.display = "none";
-
 					}
 					else
 					{
-						ele1.style.display = "none";
 						ele2.style.display = "none";
-						ele3.style.display = "block";
-
 					}
 				}
 				//var ele = document.getElementById('test');
