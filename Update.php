@@ -2,15 +2,17 @@
 	<head>
 		<script>
 			function pullFromBranch(){
+				alert('test');
 				var branch = document.getElementById("branchName").value;
 				document.getElementById("branchName").innerHTML += branch;
+				alert(branch);
 			}
 		</script>
 		<div>Pull from branch:</div>
 		<div>
 			<form>
 				Branch:
-				<input type="text" onclick="pullFromBranch();" value="master" id="branchName">
+				<input type="text" onclick="pullFromBranch()" value="master" id="branchName">
 			</form>
 		</div>
 		<div>
