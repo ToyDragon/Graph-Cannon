@@ -10,7 +10,7 @@
 		</div>
 		<div>Pull from branch:</div>
 		<div>
-			Branch: 
+			<p>Branch:</p> 
 			<form style="float:left">
 				<input type="text" onclick="pullFromBranch();" value="master" id="branchName">
 			</form>
