@@ -1,5 +1,8 @@
 <?php
-$output = shell_exec('git pull 2>&1');
+if(!$_GET['branch']){
+	$_GET['branch'] = "master";
+}
+$output = shell_exec("git pull origin ".$_GET['branch'].":".$_GET['branch']." 2>&1");
 if(!$output){
 	$output = "Error running script";
 }

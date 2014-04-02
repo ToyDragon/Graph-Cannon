@@ -6,6 +6,9 @@
 				var branch = document.getElementById("branchName").value;
 				document.getElementById("branchName").innerHTML += branch;
 				alert(branch);
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open( "GET", "PullGraphCannon.php?branch="+branch, false );
+				xmlHttp.send( null );
 			}
 		</script>
 		<div>Pull from branch:</div>
