@@ -3,7 +3,7 @@
 		<script>
 			function pullFromBranch(){
 				var branch = document.getElementById("branchName").value;
-				var log = document.getElementById("log").value;
+				var log = document.getElementById("log");
 				alert(1);
 				document.getElementById("branchName").innerHTML += branch;
 				var xmlHttp = new XMLHttpRequest();
