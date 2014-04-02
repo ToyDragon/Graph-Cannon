@@ -6,7 +6,7 @@
 			<option>test3</option>
 		</select>
 		<form>
-			<input type = "text">
+			<input type="text" onclick="pullFromBranch" value="master">
 		</form>
 	</head>
 </html>
