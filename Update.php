@@ -8,7 +8,8 @@
 				var xmlHttp = new XMLHttpRequest();
 				xmlHttp.open( "GET", "PullGraphCannon.php?branch="+branch, false );
 				xmlHttp.send( null );
-				log.innerHTML += xmlHttp.responseText;
+				log.innerHTML = xmlHttp.responseText;
+				alert(1);
 			}
 		</script>
 		<div>Pull from branch:</div>
