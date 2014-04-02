@@ -12,7 +12,8 @@
 		<div>
 			<form>
 				Branch:
-				<input type="text" onclick="pullFromBranch()" value="master" id="branchName">
+				<input type="text" value="master" id="branchName">
+				<input type="button" onclick="pullFromBranch()" value="Pull!" id="pullButton">
 			</form>
 		</div>
 		<div>
