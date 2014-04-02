@@ -11,8 +11,8 @@
 		<div>Pull from branch:</div>
 		<div>
 			Branch: 
-			<form>
-				<input type="text" onclick="pullFromBranch();" value="master" id="branchName" style="float:left">
+			<form style="float:left">
+				<input type="text" onclick="pullFromBranch();" value="master" id="branchName">
 			</form>
 		</div>
 	</head>
